@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# Ловим ошибки и прекращаем выполнение скрипта
+set -e
 # создаём каталог task с вложенными директориями
 # task
 #   dir1
@@ -10,7 +12,7 @@ mkdir -p task/dir1
 mkdir -p task/dir2
 mkdir -p task/dir3/dir4
 # изменяем текущую директорию на task
-cd task || { echo "Не удалось перейти в директорию task"; exit 1; }
+cd task
 # создаём пустой файл task/dir2/empty
 touch dir2/empty
 # создаём файл task/dir2/hello.sh с таким содержанием:
@@ -21,7 +23,7 @@ cat << 'EOF' > dir2/hello.sh
 echo "$1, привет!"
 EOF
 # устанавливаем для task/dir2/hello.sh права rwxrw-r--
-chmod 766 dir2/hello.sh
+chmod 764 dir2/hello.sh
 # сохраняем список файлов task/dir2 в task/dir2/list.txt
 ls dir2 > dir2/list.txt
 # копируем содержимое каталога task/dir2 в каталог task/dir3/dir4
